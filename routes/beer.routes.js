@@ -1,23 +1,19 @@
 const express = require("express");
+const {
+    setBeers,
+    getBeers,
+    editBeer,
+    deleteBeer,
+    likeBeer,
+    dislikeBeer,
+} = require("../controllers/beer.controller");
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({
-        data:[
-            {
-                firstName:"Thomas",
-                lastName: "Bouron"
-            }
-        ]
-    })
-});
+router.get("/", getBeers);
+router.post("/", setBeers);
+router.put("/:id", editBeer);
+router.delete("/:id", deleteBeer);
+router.patch("/like-beer/:id", likeBeer);
+router.patch("/dislike-beer/:id", dislikeBeer);
 
-router.post('/', (req, res) => {
-    res.json({message: req.body.message})
-});
-
-router.put('/:id', (req, res) => {
-    res.json({messageID: req.params.id})
-});
-
-module.exports = router
+module.exports = router;
